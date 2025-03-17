@@ -20,19 +20,28 @@ public class TaskCliApp {
                     System.out.println("invalid command 2: java TaskCliApp add <task description>");
                     break;
                 }
-
                 taskList = fileManager.getTasksFromFile();
+                Task taskToBeAdded = new Task(taskList.size() + 1);
 
                 String taskDescription = arguments[1];
+                taskToBeAdded.addTask(taskDescription);
+                taskList.add(taskToBeAdded);
+                break;
+            case "update":
+                if (arguments.length < 3) {
+                    System.out.println("invalid command 3: java TaskCliApp update <taskId> <task description>");
+                    break;
+                }
+                int id = Integer.parseInt(arguments[1]);
+                String updatedTaskDescription = arguments[2];
 
-                Task task = new Task(taskList.size() + 1);
+                taskList = fileManager.getTasksFromFile();
+                Task taskToBeUpdated = taskList.get(id - 1);
 
-                task.addTask(taskDescription);
-                taskList.add(task);
-
-                System.out.println(taskList.toString());
+                taskToBeUpdated.updateTask(id, updatedTaskDescription);
+                System.out.println("Updated the task ID: " + id);
+                break;
         }
-
         fileManager.writeTasks(taskList);
     }
 }
