@@ -1,9 +1,6 @@
-import java.nio.file.Path;
 import java.time.LocalDateTime;
 
 public class Task {
-    public int lastId = 0;
-
     private int id;
     private String taskDescription;
     private String status;
@@ -39,5 +36,11 @@ public class Task {
         this.status = status;
         this.createdAt = LocalDateTime.parse(createdAt);
         this.updatedAt = LocalDateTime.parse(updatedAt);
+    }
+
+    public void updateTask(int id, String updatedTaskDescription) {
+        this.id = id;
+        this.taskDescription = updatedTaskDescription;
+        this.updatedAt = LocalDateTime.now();
     }
 }

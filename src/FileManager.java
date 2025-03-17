@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FileManager {
-    private Path FILE_PATH = Path.of("tasks.json");
+    private static final Path FILE_PATH = Path.of("tasks.json");
 
     public void writeTasks(List<Task> taskList) {
 
@@ -51,7 +51,7 @@ public class FileManager {
 
         try {
             String fileContent = Files.readString(FILE_PATH);
-            if (fileContent.isEmpty()){
+            if (fileContent.isEmpty() || fileContent.equals("[]")){
                 return new ArrayList<>();
             }
 
@@ -71,16 +71,10 @@ public class FileManager {
                 String updatedAt = singleEntryTask.split(",")[4].split("[\"]:")[1].replace("\"","");
 
                 Task taskFromFile = new Task(id);
-
                 taskFromFile.readTask(taskDescription, status, createdAt, updatedAt);
-
                 taskLists.add(taskFromFile);
             }
-
-            System.out.println(taskLists);
-
             return taskLists;
-
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
