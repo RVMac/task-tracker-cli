@@ -79,24 +79,4 @@ public class FileManager {
             throw new RuntimeException(e);
         }
     }
-
-    private void convertToTaskList(String rawStringFromFile) {
-        try {
-            String fileContent = Files.readString(FILE_PATH);
-            String[] taskSplitted = fileContent.replace("[","")
-                    .replace("]","")
-                    .replace(",\n", "")
-                    .split("}");
-
-            List<String> taskLists = new ArrayList<>();
-
-            for (String task : taskSplitted){
-                String singleEntryTask = task.replace("{","").replace("\n","");
-                taskLists.add(task);
-            }
-
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
 }

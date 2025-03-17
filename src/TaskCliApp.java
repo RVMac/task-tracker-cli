@@ -26,8 +26,9 @@ public class TaskCliApp {
                 String taskDescription = arguments[1];
                 taskToBeAdded.addTask(taskDescription);
                 taskList.add(taskToBeAdded);
+                break;
             case "update":
-                if (arguments.length != 3) {
+                if (arguments.length < 3) {
                     System.out.println("invalid command 3: java TaskCliApp update <taskId> <task description>");
                     break;
                 }
