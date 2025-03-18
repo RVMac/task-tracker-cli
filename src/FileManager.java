@@ -4,6 +4,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class FileManager {
     private static final Path FILE_PATH = Path.of("tasks.json");
@@ -78,5 +79,15 @@ public class FileManager {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public List<Task> deleteTask(List<Task> taskList, int idForDelete) {
+        Task task = findTask(taskList, idForDelete).orElseThrow(() -> new IllegalArgumentException("Task ID: " + idForDelete + " is not existing."));
+        taskList.remove(task);
+        return taskList;
+    }
+
+    public Optional<Task> findTask(List<Task> taskList, int idForDelete) {
+        return taskList.stream().filter((task) -> task.getId() == idForDelete).findFirst();
     }
 }

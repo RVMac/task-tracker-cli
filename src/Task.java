@@ -43,4 +43,8 @@ public class Task {
         this.taskDescription = updatedTaskDescription;
         this.updatedAt = LocalDateTime.now();
     }
+
+    public int getId() {
+        return this.id;
+    }
 }

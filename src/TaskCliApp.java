@@ -41,6 +41,21 @@ public class TaskCliApp {
                 taskToBeUpdated.updateTask(id, updatedTaskDescription);
                 System.out.println("Updated the task ID: " + id);
                 break;
+            case "delete":
+                if (arguments.length < 2){
+                    System.out.println("invalid command 4: java TaskCliApp delete <taskId>");
+                    break;
+                }
+                int idForDelete = Integer.parseInt(arguments[1]);
+
+                taskList = fileManager.getTasksFromFile();
+                taskList = fileManager.deleteTask(taskList, idForDelete);
+                System.out.println("Deleted the task ID: " + idForDelete);
+                break;
+
+            default:
+                System.out.println("invalid command");
+                break;
         }
         fileManager.writeTasks(taskList);
     }
